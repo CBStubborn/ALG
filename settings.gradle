@@ -1,0 +1,5 @@
+rootProject.name = 'ALG'
+include 'intro-2-algorithms'
+include 'data-mining'
+include 'machine-learning'
+

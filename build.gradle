@@ -1,0 +1,30 @@
+group 'ALG'
+version '1.0-SNAPSHOT'
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = "1.7"
+        targetCompatibility = "1.7"
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile(
+                'org.slf4j:slf4j-api:1.7.13',
+                'ch.qos.logback:logback-classic:1.1.5',
+                'ch.qos.logback:logback-core:1.1.5',
+        )
+        testCompile group: 'junit', name: 'junit', version: '4.11'
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+}
