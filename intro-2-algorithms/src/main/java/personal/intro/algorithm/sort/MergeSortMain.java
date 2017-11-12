@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import personal.intro.algorithm.util.Functional;
 import personal.intro.algorithm.util.ParamsInvalidException;
 
+import java.util.Arrays;
+
 /**
  * Created by Stubborn on 2017/5/22.
  * 归并排序算法实现
@@ -44,16 +46,53 @@ public class MergeSortMain {
     }
 
     /**
+     *
+     */
+    public static void merge(int[] array, int low, int mid, int high) {
+        int[] tmp = new int[high - low + 1];
+        int i = low;
+        int j = mid + 1;
+        int k = 0;
+        while (i <= mid && j <= high) {
+            if (array[i] < array[j]) {
+                tmp[k++] = array[i++];
+            } else {
+                tmp[k++] = array[j++];
+            }
+        }
+        while (i <= mid) {
+            tmp[k++] = array[i++];
+        }
+        while (j <= high) {
+            tmp[k++] = array[j++];
+        }
+        for (int l = 0; l < k; l++) {
+            array[low + l] = tmp[l];
+        }
+    }
+
+    /**
+     * @param array
+     * @param low
+     * @param high
+     */
+    public static void mergeSort(int[] array, int low, int high) {
+        if (low < high) {
+            int mid = (high + low) / 2;
+            mergeSort(array, low, mid);
+            mergeSort(array, mid + 1, high);
+            merge(array, low, mid, high);
+        }
+    }
+
+    /**
      * @param args
      */
-    public static void main(String[] args) throws ParamsInvalidException{
-        int[] originArray_1 = Functional.getRandomIntegerArray(5);
-        InsertionSortMain.insertionSort(originArray_1);
-        LOG.info("origin array 1 is: [{}]" + Functional.convertArray2String(originArray_1));
-        int[] originArray_2 = Functional.getRandomIntegerArray(7);
-        InsertionSortMain.insertionSort(originArray_2);
-        LOG.info("origin array 2 is: [{}]" + Functional.convertArray2String(originArray_2));
-        int[] resultArray = mergeSort(originArray_1, originArray_2);
-        LOG.info("merge sorted result is: [{}]" + Functional.convertArray2String(resultArray));
+    public static void main(String[] args) throws ParamsInvalidException {
+        int[] originArray = Functional.getRandomIntegerArray(10);
+        System.out.println("origin array: " + Arrays.toString(originArray));
+        mergeSort(originArray, 0, originArray.length - 1);
+        System.out.println("sorted array: " + Arrays.toString(originArray));
+
     }
 }

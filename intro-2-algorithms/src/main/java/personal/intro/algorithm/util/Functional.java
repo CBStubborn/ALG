@@ -144,5 +144,7 @@ public class Functional {
         LOG.info("the array is: [{}]", convertArray2String(array));
         int[] subArray = getSubArray(array, 2, 7);
         LOG.info("sub array is: [{}]", convertArray2String(subArray));
+        int[] array_0 = getRandomIntegerArray(10, 0, 1);
+        System.out.println(convertArray2String(array_0));
     }
 }

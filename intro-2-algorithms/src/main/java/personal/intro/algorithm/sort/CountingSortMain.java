@@ -34,10 +34,12 @@ public class CountingSortMain {
         for (int i = 1; i < domain.length; i++) {
             domain[i] += domain[i - 1];
         }
-        for (int i = (origin.length - 1); i >= 0; i--) {
+
+        for (int i = 0; i < origin.length; i++) {
             result[domain[origin[i]] - 1] = origin[i];
             domain[origin[i]] -= 1;
         }
+
         return result;
     }
 
